@@ -1,26 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Video;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ButtonPushPlayVideo : MonoBehaviour
 {
-    [SerializeField] private Canvas vidPlayer;
+    [SerializeField] private VideoPlayer videoPlayer;
 
-    // Start is called before the first frame update
     void Start()
     {
-       // Debug.Log(" clicked");
-        GetComponent<XRSimpleInteractable>().selectEntered.AddListener(x=>PlayVideo());
-
+        Debug.Log("HEELO");
+        //GetComponent<XRSimpleInteractable>().selectEntered.AddListener(x => PlayVideo());
+        GetComponent<XRSimpleInteractable>().selectEntered.AddListener(x => PlayVideo());
+        Debug.Log("BUTTON ...");
+        //PlayVideo();
     }
 
-    // Update is called once per frame
     public void PlayVideo()
     {
-        Debug.Log("button clicked");
+        Debug.Log("BUTTON ");
+
+        if (videoPlayer != null)
+        {
+            Debug.Log("Playing Video...");
+
+            // Check if the video is already playing; if not, play it
+            if (!videoPlayer.isPlaying)
+            {
+                // Play the video
+                videoPlayer.Play();
+                Debug.Log("Video started");
+            }
+            else
+            {
+                Debug.Log("Video is already playing");
+            }
+        }
+        else
+        {
+            Debug.LogError("No VideoPlayer attached");
+        }
     }
-   
 }
